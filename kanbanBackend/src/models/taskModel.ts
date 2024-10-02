@@ -16,7 +16,7 @@ export const getAllTasks = () => tasks;
 
 // Yeni görev oluştur
 export const createTask = (task: Omit<Task, 'id'>): Task => {
-    const newTask: Task = { ...task, id: (++idCounter), status: 'To Do' }; 
+    const newTask: Task = { ...task, id: (++idCounter), status: 'todo' }; 
     console.log(newTask)
     tasks.push(newTask);
     return newTask;

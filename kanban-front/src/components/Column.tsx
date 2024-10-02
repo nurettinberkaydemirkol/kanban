@@ -28,12 +28,11 @@ export const Column: React.FC<ColumnProps> = ({
     const [, drop] = useDrop({
         accept: ItemTypes.CARD,
         drop: (item: CardItem) => {
-            
-            item.status = title;
-
-            updateTask(item.id, item)
+            const updatedCard = { ...item, status: title }; // title = column adı
+    
+            updateTask(item.id, updatedCard)
                 .then(() => {
-                    onDropCard(item);
+                    onDropCard(updatedCard); // Kartı doğru kolona taşı
                 })
                 .catch((err) => console.error(err));
         },
@@ -44,12 +43,12 @@ export const Column: React.FC<ColumnProps> = ({
             ref={drop}
             style={{
                 padding: '20px',
-                backgroundColor: '#f0f0f0',
+                backgroundColor: '#7E8CE0',
                 minHeight: '300px',
                 borderRadius: '30px'
             }}
         >
-            <Text style={{ marginBottom: '10px', textAlign: "center", fontWeight: "bold" }}>{title}</Text>
+            <Text style={{ marginBottom: '10px', textAlign: "center", fontWeight: "bold", color: "white" }}>{title}</Text>
             {cards.map((card) => (
                 <DraggableCard
                     key={card.id}
