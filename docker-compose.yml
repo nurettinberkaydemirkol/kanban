@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: ./kanban-front
+    volumes:
+      - ./kanban-front:/app
+    ports:
+      - '5173:5173'
+    command: npm run dev
+
+  backend:
+    build:
+      context: ./kanbanBackend
+    volumes:
+      - ./kanbanBackend:/app
+    ports:
+      - '3000:3000'
+    command: npm run dev
