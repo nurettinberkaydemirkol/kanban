@@ -42,7 +42,7 @@ Start the server
 ### Backend
 
 ```bash
-  cd kanban-backend
+  cd kanbanBackend
 ```
 Install dependencies
 
