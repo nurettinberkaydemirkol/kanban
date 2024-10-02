@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Text, Button, Modal, TextInput, Textarea } from '@mantine/core';
+import { Card, Text, Button, Modal, TextInput, Textarea, Container } from '@mantine/core';
 import { useDrag } from 'react-dnd';
 import { updateTask, deleteTask } from '../api';
 import { CardItem } from '../types';
@@ -57,6 +57,7 @@ export const DraggableCard: React.FC<{
     return (
         <>
             <Card
+                radius={15}
                 ref={drag}
                 shadow="sm"
                 p="lg"
@@ -64,19 +65,27 @@ export const DraggableCard: React.FC<{
             >
                 <Text>{card.title}</Text>
                 <Text size="sm">{card.description}</Text>
-                <Button
-                    onClick={() => setIsEditing(true)}
-                    style={{ marginTop: 10 }}
-                >
-                    Edit
-                </Button>
-                <Button
-                    color="red"
-                    onClick={handleDelete}
-                    style={{ marginTop: 10 }}
-                >
-                    Delete
-                </Button>
+                <Container mt={32} w={"100%"} style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                    <Button
+                        radius={10}
+                        onClick={() => setIsEditing(true)}
+                        style={{ marginTop: 10 }}
+                        w={"40%"}
+                        m={4}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        radius={10}
+                        color="red"
+                        onClick={handleDelete}
+                        style={{ marginTop: 10 }}
+                        w={"40%"}
+                        m={4}
+                    >
+                        Delete
+                    </Button>
+                </Container>
             </Card>
 
             <Modal

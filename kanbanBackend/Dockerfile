@@ -5,10 +5,8 @@ WORKDIR /app
 # package.json ve package-lock.json dosyalarını kopyala
 COPY package*.json ./
 
-# Nodemon, TypeScript, ve ts-node'u global olarak kur
-RUN npm install -g nodemon typescript ts-node
+RUN npm install -g typescript ts-node
 
-# Uygulama bağımlılıklarını kur
 RUN npm install
 
 # Uygulama dosyalarını kopyala

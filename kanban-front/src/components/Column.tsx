@@ -46,9 +46,10 @@ export const Column: React.FC<ColumnProps> = ({
                 padding: '20px',
                 backgroundColor: '#f0f0f0',
                 minHeight: '300px',
+                borderRadius: '30px'
             }}
         >
-            <Text style={{ marginBottom: '10px' }}>{title}</Text>
+            <Text style={{ marginBottom: '10px', textAlign: "center", fontWeight: "bold" }}>{title}</Text>
             {cards.map((card) => (
                 <DraggableCard
                     key={card.id}
