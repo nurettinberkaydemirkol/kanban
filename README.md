@@ -9,7 +9,7 @@ Vite, React and Mantine stack Kanban Project
 Clone the project
 
 ```bash
-  git clone https://github.com/nurettinberkaydemirkol/kanban
+  git clone https://github.com/nurettinberkaydemirkol/kanban.git
 ```
 Go to the project directory
 
