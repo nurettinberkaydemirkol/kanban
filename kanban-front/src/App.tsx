@@ -30,6 +30,7 @@ const isMobile = () => {
 function App() {
    
     const isMobileScreen = useMediaQuery('(max-width: 768px)');
+
     const [columns, setColumns] = useState<{
         todo: CardItem[];
         inProcess: CardItem[];
@@ -61,21 +62,22 @@ function App() {
     }, []);
 
     const handleDrop = (columnKey: keyof typeof columns) => (card: CardItem) => {
-        const updatedCard = { ...card, status: columnKey };
+        setColumns((prevColumns) => {
+            const newColumns = { ...prevColumns };
 
-        setColumns((prev) => {
-            const newColumns = { ...prev };
-
-            // Kartı önceki kolondan sil
+            //delete
             Object.keys(newColumns).forEach((key) => {
                 newColumns[key as keyof typeof columns] = newColumns[key as keyof typeof columns].filter(
                     (c) => c.id !== card.id
                 );
             });
-
-            // Kartı yeni kolona ekle
+            
+            //add new
+            const updatedCard = { ...card, status: columnKey };
             newColumns[columnKey].push(updatedCard);
-
+    
+            console.log("Updated columns:", newColumns); 
+    
             return newColumns;
         });
     };
@@ -103,17 +105,22 @@ function App() {
     };
 
     const handleUpdate = (id: number, updatedTask: CardItem) => {
-        setColumns((prev) => {
-            const updatedColumns = { ...prev };
+        setColumns(() => {
+            const updatedColumns = { ...columns };
             for (const key in updatedColumns) {
                 const columnKey = key as ColumnKeys;
                 updatedColumns[columnKey] = updatedColumns[columnKey].map(
                     (task) => (task.id === id ? updatedTask : task)
                 );
             }
+            console.log("updated",updatedColumns);
             return updatedColumns;
         });
     };
+
+    useEffect(() => {
+        console.log("columns state has been updated:", columns);
+    }, [columns]);
 
     return (
         <DndProvider backend={isMobile() ? TouchBackend : HTML5Backend}>

@@ -35,7 +35,16 @@ export const DraggableCard: React.FC<{
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    }));
+    }), [title, description]);
+    
+    useEffect(() => {
+        console.log("Dragged item:", {
+            id: card.id,
+            title: title,
+            description: description,
+            status: card.status,
+        });
+    }, [title, description, card.status]);
 
     const handleEdit = () => {
         const status = card.status;

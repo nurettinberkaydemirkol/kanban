@@ -27,14 +27,19 @@ export const Column: React.FC<ColumnProps> = ({
 }) => {
     const [, drop] = useDrop({
         accept: ItemTypes.CARD,
-        drop: (item: CardItem) => {
-            const updatedCard = { ...item, status: title }; // title = column adı
+        drop: async (item: CardItem) => {
+            console.log("Dropped item before update:", item); 
     
-            updateTask(item.id, updatedCard)
-                .then(() => {
-                    onDropCard(updatedCard); // Kartı doğru kolona taşı
-                })
-                .catch((err) => console.error(err));
+            const updatedCard = { ...item, status: title };
+            console.log("Updated card:", updatedCard); 
+    
+            try {
+                await updateTask(item.id, updatedCard);
+
+                onDropCard(updatedCard); 
+            } catch (err) {
+                console.error("Update task error:", err);
+            }
         },
     });
 
